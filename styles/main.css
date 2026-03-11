@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    font-family: "Work Sans", sans-serif;
+    font-family: "Fredoka", sans-serif; /* Mengganti Work Sans menjadi Fredoka */
     margin: 0;
     background-image: url(../img/bg.png);
     background-repeat: no-repeat;
@@ -332,4 +332,5 @@ button:active {
         font-size: 1.5rem;
         font-weight: lighter;
     }
+
 }
