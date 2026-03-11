@@ -2,7 +2,7 @@ html {
     box-sizing: border-box;
 }
 
-/* 1. Mengatur font ke seluruh elemen agar konsisten */
+/* 1. Font Global */
 body, button, input, select, textarea {
     font-family: "Fredoka", sans-serif;
 }
@@ -12,16 +12,17 @@ body {
     background-image: url(../img/bg.png);
     background-repeat: no-repeat;
     background-size: cover;
-    /* Memberikan smooth rendering untuk font bulat seperti Fredoka */
+    background-position: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden; /* Mencegah scrollbar muncul saat animasi */
 }
 
 .song {
     visibility: hidden;
 }
 
-/* 2. Memastikan SweetAlert (Popup) juga menggunakan Fredoka */
+/* 2. SweetAlert Perbaikan */
 .swal2-container, 
 .swal2-popup, 
 .swal2-title, 
@@ -29,41 +30,26 @@ body {
     font-family: "Fredoka", sans-serif !important;
 }
 
+/* PERBAIKAN: Menggunakan RGBA standar agar tidak error hitam pekat */
 .swal2-container.swal2-backdrop-show,
 .swal2-container.swal2-noanimation {
-    background: rgb(255 255 255 / 40%) !important;
+    background: rgba(255, 255, 255, 0.4) !important;
 }
 
 .swal2-popup {
-    background: rgb(255 255 255 / 0%) !important;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-    backdrop-filter: blur(3px) !important;
-    -webkit-backdrop-filter: blur(3px) !important;
-    border-radius: 10px !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.8) !important; /* Diberi sedikit opacity agar terlihat */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: 15px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-/* ... (Bagian button dan swal2-styled tetap sama) ... */
-.swal2-styled.swal2-cancel:focus,
-.swal2-styled.swal2-confirm:focus,
-.swal2-styled.swal2-cancel:active,
-.swal2-styled.swal2-confirm:active {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
-button:focus,
-button:active {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-
+/* 3. Tombol & Container */
 .swal2-styled.swal2-confirm,
 .swal2-styled.swal2-cancel {
     width: 100px;
-    font-family: "Fredoka", sans-serif; /* Memastikan tombol popup pakai Fredoka */
+    border-radius: 20px !important; /* Lebih bulat serasi dengan Fredoka */
 }
 
 .container {
@@ -83,56 +69,57 @@ button:active {
     top: 30vh;
 }
 
-/* 3. Menyesuaikan ketebalan font (Fredoka terlihat bagus di weight 400-600) */
-.one {
-    font-size: 4.5rem;
-    font-weight: 600; 
-}
-
-.two {
-    font-size: 1.2rem;
-    font-weight: 300;
-}
-
-.three {
-    font-size: 3rem;
-    font-weight: 500;
-}
+/* 4. Tipografi */
+.one { font-size: 4.5rem; font-weight: 600; }
+.two { font-size: 1.2rem; font-weight: 300; }
+.three { font-size: 2.5rem; font-weight: 500; }
 
 .four .text-box {
-    border: 3px solid #aaa;
-    border-radius: 15px; /* Dibuat lebih bulat agar serasi dengan Fredoka */
+    border: 3px solid #f0f0f0;
+    border-radius: 15px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 15px;
     position: relative;
-    width: 600px;
+    width: 80%; /* Menggunakan % agar lebih responsif */
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.text-box p {
-    margin: 0;
-    text-align: left;
-    line-height: 1.5;
+/* 5. PERBAIKAN BUG LINGKARAN HITAM (.eight) */
+.eight {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: -1; /* Pastikan di belakang teks */
+    pointer-events: none; /* Agar tidak menghalangi klik */
 }
 
-/* ... (Bagian elemen lainnya seperti baloons dan svg tetap sama) ... */
+.eight svg {
+    left: 0;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    width: 20px; /* Ukuran awal dipaksa kecil */
+    height: 20px;
+}
+
+/* 6. Animasi & Balon */
+.six img.profile-picture {
+    height: 300px;
+    border-radius: 50%; /* Agar foto Mama jadi bulat cantik */
+    border: 5px solid white;
+}
 
 .wish-hbd {
-    font-size: 1.5em;
-    margin: 0;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #333;
 }
 
-.wish h5 {
-    font-size: 2rem;
-    font-weight: 300;
-    margin: 10px 0 0;
+/* Tambahkan ini di bagian media query paling bawah */
+@media screen and (max-width: 500px) {
+    .one { font-size: 2.5rem; }
+    .three { font-size: 1.5rem; }
+    .six img.profile-picture { height: 200px; }
 }
-
-.nine p {
-    font-size: 2rem;
-    font-weight: 400;
-}
-
-/* ... (Media Queries tetap sama) ... */
